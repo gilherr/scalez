@@ -2,11 +2,15 @@ const express = require('express')
 const routes = require('./routes');
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser');
+const customMiddleWares = require('./middlewares')
 
 const PORT = process.env.PORT || '3000';
 
 // Setup express app
 const app = express();
+app.use(cookieParser());
+app.use(customMiddleWares.getUserMetaFromCookie);
 
 // Setup logger
 app.use(morgan('dev'))

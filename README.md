@@ -13,7 +13,7 @@ Scalez home assignment. Part of a fullstack interview.
 | `/users` | PUT | Create a new user |
 | `/users` | GET | List all users |
 | `/users/{user_id}` | GET | List user history |
-| `/funnel/rate?{product_id}&{rating}` | PUT | Put user rating for a product |
+| `/funnel/rate?{product_id}&{like}` | PUT | Put user rating for a product |
 | `/funnel/finished` | GET | Update user 'isNew' state  |
 | `/closet` | GET | List user liked products |
 
