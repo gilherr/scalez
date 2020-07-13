@@ -34,24 +34,24 @@ Scalez home assignment. Part of a fullstack interview.
 |---|---|
 | `user_id` | int |
 | `isNew` | bool |
+| `created_at` | timestamp |
 
 ### Product
 
 |key|type|
 |---|---|
 | `product_id` | int |
-| `isNew` | bool |
+| `meta` | jsonb |
 
 ### Rating
 
 |key|type|
 |---|---|
-| `rateing_id` | int |
+| `rating_id` | int |
 | `product_id` | int |
 | `user_id` | int |
 | `like` | bool |
-| `dislike` | bool |
-| `timestamp` | timestamp |
+| `created_at` | timestamp |
 
 ### ABTest
 
@@ -61,5 +61,5 @@ Scalez home assignment. Part of a fullstack interview.
 | `name` | varchar |
 | `user_id` | int |
 | `group` | bool |
-| `timestamp` | timestamp |
 | `conversion` | bool |
+| `created_at` | timestamp |
