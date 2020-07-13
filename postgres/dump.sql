@@ -5,7 +5,7 @@
 -- Dumped from database version 12.3
 -- Dumped by pg_dump version 12.2
 
--- Started on 2020-07-13 11:40:06 UTC
+-- Started on 2020-07-13 20:34:57 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,28 +23,26 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 209 (class 1259 OID 16422)
+-- TOC entry 209 (class 1259 OID 16443)
 -- Name: abtest; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.abtest (
     abtest_id bigint NOT NULL,
     name character varying,
-    fk_user_id bigint,
-    "group" character varying,
-    created_at timestamp with time zone DEFAULT now(),
-    conversion boolean
+    groups character varying[],
+    created_at timestamp with time zone DEFAULT now()
 );
 
 
 ALTER TABLE public.abtest OWNER TO postgres;
 
 --
--- TOC entry 208 (class 1259 OID 16420)
--- Name: abtest_abtest_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 208 (class 1259 OID 16441)
+-- Name: abtest_abtest_id_seq1; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.abtest_abtest_id_seq
+CREATE SEQUENCE public.abtest_abtest_id_seq1
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -52,19 +50,61 @@ CREATE SEQUENCE public.abtest_abtest_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.abtest_abtest_id_seq OWNER TO postgres;
+ALTER TABLE public.abtest_abtest_id_seq1 OWNER TO postgres;
 
 --
--- TOC entry 3001 (class 0 OID 0)
+-- TOC entry 3016 (class 0 OID 0)
 -- Dependencies: 208
--- Name: abtest_abtest_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: abtest_abtest_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.abtest_abtest_id_seq OWNED BY public.abtest.abtest_id;
+ALTER SEQUENCE public.abtest_abtest_id_seq1 OWNED BY public.abtest.abtest_id;
 
 
 --
--- TOC entry 205 (class 1259 OID 16394)
+-- TOC entry 211 (class 1259 OID 16455)
+-- Name: abtest_allocation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.abtest_allocation (
+    allocation_id bigint NOT NULL,
+    name character varying,
+    "group" character varying,
+    conversion boolean DEFAULT false,
+    created_at time with time zone DEFAULT now(),
+    fk_user_id bigint,
+    fk_abtest_id bigint
+);
+
+
+ALTER TABLE public.abtest_allocation OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 16453)
+-- Name: abtest_allocations_allocation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.abtest_allocations_allocation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.abtest_allocations_allocation_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3017 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: abtest_allocations_allocation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.abtest_allocations_allocation_id_seq OWNED BY public.abtest_allocation.allocation_id;
+
+
+--
+-- TOC entry 202 (class 1259 OID 16393)
 -- Name: product; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -77,7 +117,7 @@ CREATE TABLE public.product (
 ALTER TABLE public.product OWNER TO postgres;
 
 --
--- TOC entry 204 (class 1259 OID 16392)
+-- TOC entry 203 (class 1259 OID 16399)
 -- Name: product_product_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -92,8 +132,8 @@ CREATE SEQUENCE public.product_product_id_seq
 ALTER TABLE public.product_product_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3002 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 3018 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: product_product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -101,7 +141,7 @@ ALTER SEQUENCE public.product_product_id_seq OWNED BY public.product.product_id;
 
 
 --
--- TOC entry 207 (class 1259 OID 16402)
+-- TOC entry 204 (class 1259 OID 16401)
 -- Name: rating; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -117,7 +157,7 @@ CREATE TABLE public.rating (
 ALTER TABLE public.rating OWNER TO postgres;
 
 --
--- TOC entry 206 (class 1259 OID 16400)
+-- TOC entry 205 (class 1259 OID 16405)
 -- Name: rating_rating_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -132,8 +172,8 @@ CREATE SEQUENCE public.rating_rating_id_seq
 ALTER TABLE public.rating_rating_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3003 (class 0 OID 0)
--- Dependencies: 206
+-- TOC entry 3019 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: rating_rating_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -141,7 +181,7 @@ ALTER SEQUENCE public.rating_rating_id_seq OWNED BY public.rating.rating_id;
 
 
 --
--- TOC entry 202 (class 1259 OID 16384)
+-- TOC entry 206 (class 1259 OID 16407)
 -- Name: user; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -155,7 +195,7 @@ CREATE TABLE public."user" (
 ALTER TABLE public."user" OWNER TO postgres;
 
 --
--- TOC entry 203 (class 1259 OID 16387)
+-- TOC entry 207 (class 1259 OID 16411)
 -- Name: user_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -170,8 +210,8 @@ CREATE SEQUENCE public.user_user_id_seq
 ALTER TABLE public.user_user_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3004 (class 0 OID 0)
--- Dependencies: 203
+-- TOC entry 3020 (class 0 OID 0)
+-- Dependencies: 207
 -- Name: user_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -179,15 +219,23 @@ ALTER SEQUENCE public.user_user_id_seq OWNED BY public."user".user_id;
 
 
 --
--- TOC entry 2849 (class 2604 OID 16425)
+-- TOC entry 2856 (class 2604 OID 16446)
 -- Name: abtest abtest_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.abtest ALTER COLUMN abtest_id SET DEFAULT nextval('public.abtest_abtest_id_seq'::regclass);
+ALTER TABLE ONLY public.abtest ALTER COLUMN abtest_id SET DEFAULT nextval('public.abtest_abtest_id_seq1'::regclass);
 
 
 --
--- TOC entry 2846 (class 2604 OID 16397)
+-- TOC entry 2858 (class 2604 OID 16458)
+-- Name: abtest_allocation allocation_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.abtest_allocation ALTER COLUMN allocation_id SET DEFAULT nextval('public.abtest_allocations_allocation_id_seq'::regclass);
+
+
+--
+-- TOC entry 2851 (class 2604 OID 16414)
 -- Name: product product_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -195,7 +243,7 @@ ALTER TABLE ONLY public.product ALTER COLUMN product_id SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 2847 (class 2604 OID 16405)
+-- TOC entry 2853 (class 2604 OID 16415)
 -- Name: rating rating_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -203,7 +251,7 @@ ALTER TABLE ONLY public.rating ALTER COLUMN rating_id SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 2844 (class 2604 OID 16389)
+-- TOC entry 2855 (class 2604 OID 16416)
 -- Name: user user_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -211,18 +259,30 @@ ALTER TABLE ONLY public."user" ALTER COLUMN user_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 2995 (class 0 OID 16422)
+-- TOC entry 3008 (class 0 OID 16443)
 -- Dependencies: 209
 -- Data for Name: abtest; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.abtest (abtest_id, name, fk_user_id, "group", created_at, conversion) FROM stdin;
+COPY public.abtest (abtest_id, name, groups, created_at) FROM stdin;
+1	test_a	{group_a,group_b}	2020-07-13 20:19:41.82196+00
 \.
 
 
 --
--- TOC entry 2991 (class 0 OID 16394)
--- Dependencies: 205
+-- TOC entry 3010 (class 0 OID 16455)
+-- Dependencies: 211
+-- Data for Name: abtest_allocation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.abtest_allocation (allocation_id, name, "group", conversion, created_at, fk_user_id, fk_abtest_id) FROM stdin;
+1	test_a	group_a	f	20:33:51.343546+00	2	1
+\.
+
+
+--
+-- TOC entry 3001 (class 0 OID 16393)
+-- Dependencies: 202
 -- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -248,41 +308,61 @@ COPY public.product (product_id, meta) FROM stdin;
 
 
 --
--- TOC entry 2993 (class 0 OID 16402)
--- Dependencies: 207
+-- TOC entry 3003 (class 0 OID 16401)
+-- Dependencies: 204
 -- Data for Name: rating; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.rating (rating_id, fk_product_id, fk_user_id, "like", created_at) FROM stdin;
+1	4	3	t	2020-07-13 18:19:59.768692+00
+2	2	3	t	2020-07-13 18:20:40.746309+00
+3	2	1	t	2020-07-13 18:51:10.50666+00
+4	5	4	t	2020-07-13 18:51:26.685654+00
+5	6	4	f	2020-07-13 18:51:32.108285+00
+7	10	2	f	2020-07-13 19:08:54.899295+00
+8	8	2	f	2020-07-13 19:10:56.22038+00
+9	6	2	t	2020-07-13 19:11:02.841679+00
+10	1	2	t	2020-07-13 19:11:09.20986+00
 \.
 
 
 --
--- TOC entry 2988 (class 0 OID 16384)
--- Dependencies: 202
+-- TOC entry 3005 (class 0 OID 16407)
+-- Dependencies: 206
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."user" (user_id, is_new, created_at) FROM stdin;
 1	t	11:15:04.283216+00
-2	t	11:15:04.283216+00
 3	t	11:15:04.283216+00
 4	t	11:15:04.283216+00
+5	t	16:15:15.244578+00
+6	t	16:39:02.034411+00
+2	f	11:15:04.283216+00
 \.
 
 
 --
--- TOC entry 3005 (class 0 OID 0)
+-- TOC entry 3021 (class 0 OID 0)
 -- Dependencies: 208
--- Name: abtest_abtest_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: abtest_abtest_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.abtest_abtest_id_seq', 1, false);
+SELECT pg_catalog.setval('public.abtest_abtest_id_seq1', 1, true);
 
 
 --
--- TOC entry 3006 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 3022 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: abtest_allocations_allocation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.abtest_allocations_allocation_id_seq', 1, true);
+
+
+--
+-- TOC entry 3023 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: product_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -290,34 +370,43 @@ SELECT pg_catalog.setval('public.product_product_id_seq', 17, true);
 
 
 --
--- TOC entry 3007 (class 0 OID 0)
--- Dependencies: 206
+-- TOC entry 3024 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: rating_rating_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.rating_rating_id_seq', 1, false);
+SELECT pg_catalog.setval('public.rating_rating_id_seq', 10, true);
 
 
 --
--- TOC entry 3008 (class 0 OID 0)
--- Dependencies: 203
+-- TOC entry 3025 (class 0 OID 0)
+-- Dependencies: 207
 -- Name: user_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.user_user_id_seq', 4, true);
+SELECT pg_catalog.setval('public.user_user_id_seq', 6, true);
 
 
 --
--- TOC entry 2858 (class 2606 OID 16431)
--- Name: abtest abtest_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2870 (class 2606 OID 16464)
+-- Name: abtest_allocation abtest_allocations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.abtest_allocation
+    ADD CONSTRAINT abtest_allocations_pkey PRIMARY KEY (allocation_id);
+
+
+--
+-- TOC entry 2868 (class 2606 OID 16452)
+-- Name: abtest abtest_pkey1; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.abtest
-    ADD CONSTRAINT abtest_pkey PRIMARY KEY (abtest_id);
+    ADD CONSTRAINT abtest_pkey1 PRIMARY KEY (abtest_id);
 
 
 --
--- TOC entry 2854 (class 2606 OID 16399)
+-- TOC entry 2862 (class 2606 OID 16420)
 -- Name: product product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -326,7 +415,7 @@ ALTER TABLE ONLY public.product
 
 
 --
--- TOC entry 2856 (class 2606 OID 16407)
+-- TOC entry 2864 (class 2606 OID 16422)
 -- Name: rating rating_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -335,7 +424,7 @@ ALTER TABLE ONLY public.rating
 
 
 --
--- TOC entry 2852 (class 2606 OID 16391)
+-- TOC entry 2866 (class 2606 OID 16424)
 -- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -344,16 +433,25 @@ ALTER TABLE ONLY public."user"
 
 
 --
--- TOC entry 2861 (class 2606 OID 16432)
--- Name: abtest abtest_fk_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2874 (class 2606 OID 16470)
+-- Name: abtest_allocation abtest_allocations_fk_abtest_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.abtest
-    ADD CONSTRAINT abtest_fk_user_id_fkey FOREIGN KEY (fk_user_id) REFERENCES public."user"(user_id);
+ALTER TABLE ONLY public.abtest_allocation
+    ADD CONSTRAINT abtest_allocations_fk_abtest_id_fkey FOREIGN KEY (fk_abtest_id) REFERENCES public.abtest(abtest_id);
 
 
 --
--- TOC entry 2859 (class 2606 OID 16408)
+-- TOC entry 2873 (class 2606 OID 16465)
+-- Name: abtest_allocation abtest_allocations_fk_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.abtest_allocation
+    ADD CONSTRAINT abtest_allocations_fk_user_id_fkey FOREIGN KEY (fk_user_id) REFERENCES public."user"(user_id);
+
+
+--
+-- TOC entry 2871 (class 2606 OID 16430)
 -- Name: rating rating_fk_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -362,7 +460,7 @@ ALTER TABLE ONLY public.rating
 
 
 --
--- TOC entry 2860 (class 2606 OID 16413)
+-- TOC entry 2872 (class 2606 OID 16435)
 -- Name: rating rating_fk_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -370,7 +468,7 @@ ALTER TABLE ONLY public.rating
     ADD CONSTRAINT rating_fk_user_id_fkey FOREIGN KEY (fk_user_id) REFERENCES public."user"(user_id);
 
 
--- Completed on 2020-07-13 11:40:06 UTC
+-- Completed on 2020-07-13 20:34:57 UTC
 
 --
 -- PostgreSQL database dump complete
