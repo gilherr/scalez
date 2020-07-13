@@ -55,5 +55,26 @@ module.exports = {
             return false;
         }
     },
-    }
+
+    // closet
+
+    getUserCloset: async (userId) => {
+        try {
+            const result = await dbClient.result(
+                `SELECT
+                    meta
+                FROM
+                    product
+                INNER JOIN rating
+                    ON product.product_id = rating.fk_product_id
+                WHERE
+                    rating.like = true 
+                    AND 
+                    rating.fk_user_id = $1`, [userId])
+            return result.rows;
+        } catch (e) {
+            console.error(e)
+            return false;
+        }
+    },
 };
