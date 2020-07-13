@@ -1,7 +1,7 @@
 const express = require('express')
 const routes = require('./routes');
 const bodyParser = require('body-parser')
-var morgan = require('morgan')
+const morgan = require('morgan')
 
 const PORT = process.env.PORT || '3000';
 
@@ -9,7 +9,7 @@ const PORT = process.env.PORT || '3000';
 const app = express();
 
 // Setup logger
-app.use(morgan('common'))
+app.use(morgan('dev'))
 
 // Setup router
 app.use('/', routes);
