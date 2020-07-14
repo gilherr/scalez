@@ -25,8 +25,8 @@ funnel.get('/getProducts', async (req, res) => {
     const {productsShow} = req.query;
 
     try {
-        const seenProducts = await db.seenProducts(req.userId);
-        const products = await db.getProducts(productsShow, seenProducts);
+        const seenProductsIds = await db.seenProductsIds(req.userId);
+        const products = await db.getProducts(productsShow, seenProductsIds);
         res.status(200).json(products);
     } catch (e) {
         console.error(e)

@@ -32,4 +32,17 @@ users.get('/:userId', async (req, res) => {
 
 });
 
+users.get('/:userId/products', async (req, res) => {
+    try {
+        const user = await db.getAllProductsSeenByUser(req.params.userId)
+        res.status(200).json(user);
+    } catch (e) {
+        console.error(e)
+        res.status(500).json({error: 'failed to get users seen products'});
+    }
+
+});
+
+
+
 module.exports = users;

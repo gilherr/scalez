@@ -24,7 +24,30 @@ module.exports = {
             return user;
         } catch (e) {
             console.error(e)
-            return 'ERROR getting all users';
+            return 'ERROR getting user';
+        }
+    },
+
+    getAllProductsSeenByUser: async (userId) => {
+        try {
+            const user = await dbClient.result(
+                `SELECT 
+                    product_id, "like",
+                    meta AS product_meta, 
+                    created_at AS rating_timestamp
+                FROM
+                    rating
+                INNER JOIN 
+                    product 
+                ON 
+                    product.product_id = rating.fk_product_id
+                WHERE
+                    fk_user_id = $1`, 
+                [userId])
+            return user.rows;
+        } catch (e) {
+            console.error(e)
+            return 'ERROR getting users seen products';
         }
     },
 
@@ -54,8 +77,7 @@ module.exports = {
 
     // funnel
 
-    getProducts: async (productsShow, seenProducts) => {
-        console.log('seenProducts', seenProducts)
+    getProducts: async (productsShow, seenProductsIds) => {
         try {
             const result = await dbClient.result(
                 `SELECT 
@@ -67,7 +89,7 @@ module.exports = {
                 ORDER BY 
                     RANDOM() 
                 LIMIT $2;`,
-                [seenProducts, productsShow])
+                [seenProductsIds, productsShow])
             return result.rows;
         } catch (e) {
             console.error(e)
@@ -75,7 +97,7 @@ module.exports = {
         }
     },
 
-    seenProducts: async (userId) => {
+    seenProductsIds: async (userId) => {
         try {
             const result = await dbClient.result(
                 `SELECT
@@ -95,7 +117,14 @@ module.exports = {
     rateProduct: async (productId, userId, like) => {
         try {
             await dbClient.result(
-                'INSERT INTO "rating" (fk_product_id, fk_user_id, "like") VALUES ($1,$2,$3)', 
+                `INSERT INTO 
+                    "rating" (fk_product_id, fk_user_id, "like") 
+                VALUES 
+                    ($1,$2,$3)
+                ON CONFLICT (fk_product_id, fk_user_id) DO 
+                    UPDATE SET 
+                        "like" = $3;
+                `, 
                 [productId,userId,like])
             return true;
         } catch (e) {
