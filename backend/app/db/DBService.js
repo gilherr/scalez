@@ -77,4 +77,50 @@ module.exports = {
             return false;
         }
     },
+
+    // abtest
+
+    setAbtestAllocationConversion: async (allocationId) => {
+        try {
+            return await dbClient.none(
+                `UPDATE 
+                    abtest_allocation
+                SET 
+                    "conversion" = true
+                WHERE 
+                    allocation_id = $1;`, [allocationId])
+        } catch (e) {
+            console.error(e)
+            return false;
+        }
+    },
+
+    getAbtestByName: async (abtestName) => {
+        try {
+            return await dbClient.one('SELECT abtest_id, groups FROM abtest WHERE name = $1', [abtestName])
+        } catch (e) {
+            console.error(e)
+            return {abtest_id: -1, groups: []};
+        }
+    },
+
+    startExperiment: async (userId, abtestName, group, abtestId) => {
+        try {
+            const result = await dbClient.one(
+                `INSERT INTO 
+                    abtest_allocation
+                    ("name", "group", fk_user_id, fk_abtest_id)
+                 VALUES 
+                    ($1,$2,$3,$4)
+                 RETURNING 
+                    allocation_id`, 
+                 [abtestName, group, userId, abtestId])
+            return Number(result.allocation_id);
+        } catch (e) {
+            if(e.constraint === 'abtest_allocation_pkey')
+                throw('abtest already exists')
+            console.log(e)
+            return false;
+        }
+    },
 };

@@ -12,19 +12,19 @@ Scalez home assignment. Part of a fullstack interview.
 |---|---|---|
 | `/users` | PUT | Create a new user |
 | `/users` | GET | List all users |
-| `/users/{user_id}` | GET | List user history |
-| `/funnel/rate?{product_id}&{like}` | PUT | Put user rating for a product |
+| `/users/{userId}` | GET | List user history |
+| `/funnel/rate?{productId}&{like}` | PUT | Put user rating for a product |
 | `/funnel/finished` | GET | Update user 'isNew' state  |
 | `/closet` | GET | List user liked products |
+| `/abtest/` | GET | List all experiments |
+| `/abtest/{abtestName}` | GET | List experiment data |
+| `/abtest/start/{abtestName}` | PUT | Get test allocation for current user |
+| `/abtest/end/{abtestName}` | GET | End experiment successfuly |
 
 ### Abtest
 
 |path|type|notes|
 |---|---|---|
-| `/start/{experiment_name}` | GET | Get test allocation for current user |
-| `/end/{experiment_name}` | GET | End experiment successfuly |
-| `/experiment` | GET | List all experiments |
-| `/experiment/{experiment_name}` | GET | List experiment data |
 
 ## Data Model
 
