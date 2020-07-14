@@ -14,17 +14,13 @@ Scalez home assignment. Part of a fullstack interview.
 | `/users` | GET | List all users |
 | `/users/{userId}` | GET | List user history |
 | `/funnel/rate?{productId}&{like}` | PUT | Put user rating for a product |
+| `/funnel/getProducts?{productsShow}` | GET | Get products to show in rating page|
 | `/funnel/finished` | GET | Update user 'isNew' state  |
 | `/closet` | GET | List user liked products |
 | `/abtest/` | GET | List all experiments |
 | `/abtest/{abtestName}` | GET | List experiment data |
 | `/abtest/start/{abtestName}` | PUT | Get test allocation for current user |
 | `/abtest/end/{abtestName}` | GET | End experiment successfuly |
-
-### Abtest
-
-|path|type|notes|
-|---|---|---|
 
 ## Data Model
 

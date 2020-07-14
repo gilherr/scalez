@@ -6,7 +6,9 @@ module.exports = {
 
     getAllUsers: async () => {
         try {
-            const result = await dbClient.result('SELECT user_id, is_new FROM "user"')
+            const result = await dbClient.result(
+                'SELECT user_id, is_new FROM "user"'
+                )
             return result.rows;
         } catch (e) {
             console.error(e)
@@ -16,7 +18,9 @@ module.exports = {
 
     getUser: async (userId) => {
         try {
-            const user = await dbClient.one('SELECT * FROM "user" WHERE user_id = $1', [userId])
+            const user = await dbClient.one(
+                'SELECT * FROM "user" WHERE user_id = $1', 
+                [userId])
             return user;
         } catch (e) {
             console.error(e)
@@ -26,7 +30,9 @@ module.exports = {
 
     createNewUser: async () => {
         try {
-            await dbClient.result('INSERT INTO "user" (is_new) VALUES (TRUE)')
+            await dbClient.result(
+                'INSERT INTO "user" (is_new) VALUES (TRUE)'
+                )
             return true;
         } catch (e) {
             console.error(e)
@@ -36,7 +42,9 @@ module.exports = {
 
     setUserAsNotNew: async (userId) => {
         try {
-            await dbClient.result('UPDATE "user" SET is_new = false WHERE user_id = $1', [userId])
+            await dbClient.result(
+                'UPDATE "user" SET is_new = false WHERE user_id = $1', 
+                [userId])
             return true;
         } catch (e) {
             console.error(e)
@@ -46,9 +54,49 @@ module.exports = {
 
     // funnel
 
+    getProducts: async (productsShow, seenProducts) => {
+        console.log('seenProducts', seenProducts)
+        try {
+            const result = await dbClient.result(
+                `SELECT 
+                    * 
+                FROM 
+                    product 
+                WHERE NOT 
+                    (product_id = ANY ($1))  
+                ORDER BY 
+                    RANDOM() 
+                LIMIT $2;`,
+                [seenProducts, productsShow])
+            return result.rows;
+        } catch (e) {
+            console.error(e)
+            return false;
+        }
+    },
+
+    seenProducts: async (userId) => {
+        try {
+            const result = await dbClient.result(
+                `SELECT
+                    fk_product_id
+                FROM
+                    rating
+                WHERE
+                    fk_user_id = $1;`,
+                [userId])
+            return result.rows.map(row => row.fk_product_id * 1);
+        } catch (e) {
+            console.error(e)
+            return false;
+        }
+    },
+
     rateProduct: async (productId, userId, like) => {
         try {
-            await dbClient.result('INSERT INTO "rating" (fk_product_id, fk_user_id, "like") VALUES ($1,$2,$3)', [productId,userId,like])
+            await dbClient.result(
+                'INSERT INTO "rating" (fk_product_id, fk_user_id, "like") VALUES ($1,$2,$3)', 
+                [productId,userId,like])
             return true;
         } catch (e) {
             console.error(e)
@@ -97,7 +145,9 @@ module.exports = {
 
     getAbtestByName: async (abtestName) => {
         try {
-            return await dbClient.one('SELECT abtest_id, groups FROM abtest WHERE name = $1', [abtestName])
+            return await dbClient.one(
+                'SELECT abtest_id, groups FROM abtest WHERE name = $1', 
+                [abtestName])
         } catch (e) {
             console.error(e)
             return {abtest_id: -1, groups: []};

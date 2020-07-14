@@ -20,6 +20,20 @@ funnel.put('/rate', async (req, res) => {
     }
 });
 
+funnel.get('/getProducts', async (req, res) => {
+
+    const {productsShow} = req.query;
+
+    try {
+        const seenProducts = await db.seenProducts(req.userId);
+        const products = await db.getProducts(productsShow, seenProducts);
+        res.status(200).json(products);
+    } catch (e) {
+        console.error(e)
+        res.status(500).json({error: 'failed to get products'});
+    }
+});
+
 funnel.get('/finished', async (req, res) => {
 
     if(!req.userId){
