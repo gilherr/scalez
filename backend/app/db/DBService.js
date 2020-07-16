@@ -63,11 +63,11 @@ module.exports = {
         }
     },
 
-    setUserAsNotNew: async (userId) => {
+    setUserIsNewStatus: async (userId, isNew) => {
         try {
             await dbClient.result(
-                'UPDATE "user" SET is_new = false WHERE user_id = $1', 
-                [userId])
+                'UPDATE "user" SET is_new = $1 WHERE user_id = $2', 
+                [isNew, userId])
             return true;
         } catch (e) {
             console.error(e)

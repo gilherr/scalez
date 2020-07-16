@@ -41,7 +41,7 @@ funnel.get('/finished', async (req, res) => {
     }
 
     try {
-        await db.setUserAsNotNew(req.userId);
+        await db.setUserIsNewStatus(req.userId, false);
         res.status(200).send();
     } catch (e) {
         console.error(e)
