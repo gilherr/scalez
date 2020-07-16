@@ -69,14 +69,7 @@ export default {
 
     onSubmit(e) {
       e.preventDefault();
-
-      const userMeta = this.formData.user;
-
-      this.$store.dispatch('user/setUserFromCookie', userMeta)
-      this.$cookies.set('userMeta', JSON.stringify(userMeta));
-      http.updateUserMeta(userMeta);
-      
-      this.$router.push('home')
+      this.$router.push({ path: '/home', query: this.formData.user })
     },
 
   },
