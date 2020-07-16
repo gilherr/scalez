@@ -1,5 +1,8 @@
 const state = {
-    name: 'Scalez!'
+    userId: null,
+    isNew: null,
+    productsShow: null,
+    minLikedProducts: null
 };
 
 const actions = {
@@ -7,7 +10,22 @@ const actions = {
 };
 
 const mutations = {
+    setId(state, payload){
+        console.log('in commit with: ', payload)
+        state.userId = payload;
+    },
 
+    setIsNew(state, payload){
+        state.isNew = payload;
+    },
+
+    setProductsShow(state, payload){
+        state.productsShow = payload;
+    },
+
+    setMinLikedProducts(state, payload){
+        state.minLikedProducts = payload;
+    }
 }
 
 export default {
