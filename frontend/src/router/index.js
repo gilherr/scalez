@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Tester from '@/views/Tester.vue'
 import Funnel from '@/views/Funnel.vue';
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -20,9 +21,15 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isUserCookieSet = Boolean(Vue.$cookies.get('userMeta'))
+  const userCookie = Vue.$cookies.get('userMeta')
+
+  if(userCookie) {
+    store.dispatch('user/setAllUserData', userCookie)
+  }
+
+  const goingToTesterOrHome = to.name === 'Tester' || to.name === 'Home';
   
-  if (to.name !== 'Tester' && !isUserCookieSet){
+  if (!goingToTesterOrHome && !userCookie){
     next({ name: 'Tester' })
   }
   else {

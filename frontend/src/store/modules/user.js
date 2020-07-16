@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const state = {
   userId: null,
   isNew: null,
@@ -6,9 +8,12 @@ const state = {
 };
 
 const actions = {
-  setUserFromCookie({ commit }, userMetaCookie) {
-    const { user_id, is_new, productsShow, minLikedProducts } = userMetaCookie;
-    commit('setId', user_id*1);
+  setAllUserData({ commit }, userMeta) {
+    const { userId, is_new, productsShow, minLikedProducts } = userMeta;
+
+    Vue.$cookies.set('userMeta', JSON.stringify(userMeta));
+
+    commit('setId', userId);
     commit('setIsNew', is_new);
     commit('setProductsShow', productsShow);
     commit('setMinLikedProducts', minLikedProducts);
