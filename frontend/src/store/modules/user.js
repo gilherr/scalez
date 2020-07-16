@@ -11,7 +11,6 @@ const actions = {
 
 const mutations = {
     setId(state, payload){
-        console.log('in commit with: ', payload)
         state.userId = payload;
     },
 
