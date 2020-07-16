@@ -10,16 +10,28 @@ export const httpService = {
   async fetchAllUsers() {
     try {
       const response = await http.get('/users');
-      return response.data.sort((a,b)=>a.user_id - b.user_id);
+
+      response.data.forEach(user => {
+        user.minLikedProducts = 5;
+        user.productsShow = 3;
+
+        user.userId = user.user_id * 1;
+        user.isNew = user.is_new;
+        
+        delete user.user_id;
+        delete user.is_new;
+      })
+
+      return response.data.sort((a,b)=>a.userId - b.userId);
     } catch (e) {
       console.error(e);
       return false;
     }
   },
 
-  updateUserMeta(user_id, is_new) {
+  updateUserMeta({userId, isNew}) {
     try {
-      http.put(`/users/${user_id}?isNew=${is_new}`);
+      http.put(`/users/${userId}?isNew=${isNew}`);
     } catch (e) {
       console.error(e);
       return false;

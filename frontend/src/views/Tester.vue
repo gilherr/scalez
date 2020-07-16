@@ -11,13 +11,13 @@
           <option
             v-for="user in availableUsers"
             :value="user"
-            v-bind:key="user.user_id"
-          >{{user.user_id}}</option>
+            v-bind:key="user.userId"
+          >{{user.userId}}</option>
         </select>
       </p>
       <p>
         <label for="isNewUser">New user?</label>
-        <input type="checkbox" name="isNewUser" v-model="formData.user.is_new" />
+        <input type="checkbox" name="isNewUser" v-model="formData.user.isNew" />
       </p>
       <p>
         <label for="isNewUser">Number of products to show</label>
