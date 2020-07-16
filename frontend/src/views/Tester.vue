@@ -1,5 +1,5 @@
 <template>
-  <div class="tester">
+  <div class="tester-view">
     <div v-if="loading" class="loading">Loading...</div>
 
     <h1>Tester Page</h1>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { httpService as http } from '../services/http';
+import { httpService as http } from '@/services/http';
 import { mapState } from 'vuex';
 
 export default {
@@ -75,6 +75,7 @@ export default {
       this.updateUserInStore();
       this.setUserMetaInCookie();
       this.updateUserMeta();
+      this.$router.push('home')
     },
 
     updateUserInStore() {
