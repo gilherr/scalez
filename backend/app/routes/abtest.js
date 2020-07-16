@@ -20,7 +20,7 @@ abtest.put('/start/:abtestName', async (req, res) => {
             throw('failed to find abtest');
         const group = groups[Math.floor(Math.random() * groups.length)]
 
-        const allocationId = await db.startExperiment(req.userId, abtestName, group, abtestId)
+        const allocationId = await db.startExperiment(req.userMetaCookie.userId, abtestName, group, abtestId)
         const abtestMeta = {allocationId, allocatedGroup: group}
         
         // Set cookie with abtest info
