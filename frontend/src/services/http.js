@@ -9,7 +9,7 @@ export const httpService = {
 
   async fetchAllUsers() {
     try {
-      const response = await http.get(`/users`);
+      const response = await http.get('/users');
       return response.data.sort((a,b)=>a.user_id - b.user_id);
     } catch (e) {
       console.error(e);

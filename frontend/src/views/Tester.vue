@@ -29,18 +29,18 @@
       </p>
 
       <p>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Start" />
       </p>
     </form>
   </div>
 </template>
 
 <script>
-import { httpService as http } from "../services/http";
-import { mapState } from "vuex";
+import { httpService as http } from '../services/http';
+import { mapState } from 'vuex';
 
 export default {
-  name: "Tester",
+  name: 'Tester',
 
 
   data() {
@@ -57,7 +57,7 @@ export default {
 
 
   created() {
-    this.formData.user = this.$cookies.get("userMeta") || {};
+    this.formData.user = this.$cookies.get('userMeta') || {};
     this.fetchUsers();
   },
 
@@ -65,7 +65,7 @@ export default {
   methods: {
     async fetchUsers() {
       this.loading = true;
-      const response = await http.fetchAllUsers(`/users`);
+      const response = await http.fetchAllUsers('/users');
       this.loading = false;
       this.availableUsers = response ? response : [];
     },
@@ -79,15 +79,15 @@ export default {
 
     updateUserInStore() {
       const {user_id, is_new, productsShow, minLikedProducts} = this.formData.user;
-      this.$store.commit(`user/setId`, user_id);
-      this.$store.commit(`user/setIsNew`, is_new);
-      this.$store.commit(`user/setProductsShow`, productsShow);
-      this.$store.commit(`user/setMinLikedProducts`, minLikedProducts);
+      this.$store.commit('user/setId', user_id);
+      this.$store.commit('user/setIsNew', is_new);
+      this.$store.commit('user/setProductsShow', productsShow);
+      this.$store.commit('user/setMinLikedProducts', minLikedProducts);
     },
 
     setUserMetaInCookie() {
       const { user_id, is_new } = this.formData.user;
-      this.$cookies.set("userMeta", JSON.stringify({ user_id, is_new }));
+      this.$cookies.set('userMeta', JSON.stringify({ user_id, is_new }));
     },
 
     updateUserMeta() {
@@ -98,7 +98,7 @@ export default {
 
 
   computed: {
-    ...mapState("user", ["userId", "isNew", "productsShow", "minLikedProducts"])
+    ...mapState('user', ['userId', 'isNew', 'productsShow', 'minLikedProducts'])
   }
 
 
