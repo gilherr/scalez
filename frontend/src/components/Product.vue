@@ -2,16 +2,16 @@
   <div class="product-component">
 
     <div class="image">
-      <p v-if="xButton">X</p>
+      <div class="x-btn" v-if="xButton">x</div>
       <img :src="productImage" alt="Product Image" />
     </div>
 
     <div class="bottom-row">
       <div><b>${{price}}</b></div>
       <div>{{brand}}</div>
+      <div class="name">{{productName}}</div>
     </div>
 
-    <div>{{productName}}</div>
 
   </div>
 </template>
@@ -47,6 +47,9 @@ export default {
     align-items: flex-end;
     margin: 20px;
     height: 15%;
+    .name{
+      overflow: hidden;
+    }
   }
 
   .image {
@@ -55,8 +58,20 @@ export default {
 
     position:relative;
     display:inline-block;
+    .x-btn{
+      position: absolute;
+      top: 10px;
+      right: 0;
+      background: white;
+      padding: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 1px 2px 5px 0px #0000006e;
+    }
     img {
-      // display:block;
       max-width: 100%;
       max-height: 100%;
     }

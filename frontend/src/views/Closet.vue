@@ -4,19 +4,23 @@
     <h1>Closet</h1>
 
     <div class="filters">
-      icon icon icon icon
+      <img src="../assets/closet/filter-icons.png" />
     </div>
 
     <div class="products-list">
+      <div class="product-container"
+          v-for="p in products"
+          v-bind:key="p.id">
         <product
-            v-for="p in products"
-            v-bind:key="p.id"
+            
             :price="p.price"
             :productImage="p.image"
             :productName="p.productName"
             :xButton="p.xButton"
           />
+      </div>
     </div>
+
 
   </div>
 </template>
@@ -75,3 +79,33 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.closet-view{
+
+  .filters{
+    width: 100%;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .products-list{
+    display: flex;
+    flex-wrap: wrap;
+    .product-container{
+      
+      padding-top: 20px;
+      box-shadow: 4px 5px 11px 2px #0000001c;
+      border-radius: 10px;
+      margin: 15px;
+      width: 160px;
+      height: 210px;
+      .product-component .image img{
+        max-height: 150px;
+      }
+    }
+  }
+}
+</style>
