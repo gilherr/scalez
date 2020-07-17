@@ -17,23 +17,20 @@
       <button v-on:click="rateProduct(true)">V</button>
     </span>
 
-    <p>
-      numrated {{numRatedProducts}}
-  <br>
-      isnew {{isNew}}
-        <br>
-      userId {{userId}}
-    </p>
+    <pre>
+      numRatedProducts: {{numRatedProducts}},
+      productsShow: {{productsShow}},
+      isNew: {{isNew}},
+      userId: {{userId}}
+      displayedProduct: {{displayedProduct}}
+    </pre>
   </div>
 </template>
 
 <script>
-
-/*eslint-disable*/
-
 import Product from '@/components/Product.vue';
 import { httpService as http } from '@/services/http';
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'funnel',
@@ -51,7 +48,7 @@ export default {
   },
 
   computed: {
-    ...mapState('user', ['isNew', 'numRatedProducts', 'userId']),
+    ...mapState('user', ['isNew', 'numRatedProducts', 'userId', 'productsShow']),
     ...mapGetters('user', ['seenEnough']),
   },
 
@@ -62,8 +59,7 @@ export default {
   methods: {
     async fetchProducts() {
       this.loading = true;
-      const productsShow = this.$store.state.user.productsShow;
-      this.products = await http.fetchProducts(productsShow);
+      this.products = await http.fetchProducts(this.productsShow);
       this.popProduct();
       this.loading = false;
     },
@@ -84,10 +80,9 @@ export default {
     },
 
     rateProduct(rating) {
-      console.log(this.numRatedProducts);
       this.$store.commit('user/setNumRatedProducts', this.numRatedProducts + 1);
-      console.log(this.numRatedProducts);
       http.rateProduct(this.displayedProduct.id, rating);
+
       if(this.seenEnough){
         this.routeForward()
       } else {
@@ -96,7 +91,7 @@ export default {
     },
 
     routeForward() {
-      const path = this.isNew ? 'funnel/summary' : 'closet';
+      const path = this.isNew ? '/funnel/summary' : '/closet';
       this.$router.push(path)
     },
   }
