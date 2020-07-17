@@ -42,12 +42,13 @@ export default {
   },
 
   computed: {
-    ...mapState('user', ['numLikedProducts', 'minLikedProducts']),
+    ...mapState('user', ['numLikedProducts', 'minLikedProducts','userId']),
     ...mapGetters('user', ['seenEnough'])
   },
 
   created() {
     this.fetchCloset();
+    http.updateUserMeta({userId: this.userId, isNew: false})
   },
   
   methods: {
@@ -59,7 +60,7 @@ export default {
           id: p.product_id,
           price: p.meta.price,
           productName: p.meta.productName,
-          image: p.meta.images[0]
+          image: p.meta.images[0],
       }))
       this.loading = false;
     },
