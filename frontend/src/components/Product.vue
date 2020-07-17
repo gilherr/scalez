@@ -1,12 +1,14 @@
 <template>
   <div class="product-component">
     <div class="image">
+      <p v-if="xButton">X</p>
       <img :src="productImage" alt="Product Image" />
     </div>
     <div class="spread">
       <span>${{price}}</span>
       <span>{{brand}}</span>
     </div>
+      <div>{{productName}}</div>
   </div>
 </template>
 
@@ -17,7 +19,9 @@ export default {
   props: {
     price: Number,
     brand: String,
-    productImage: String
+    productImage: String,
+    productName: String,
+    xButton: Boolean,
   },
 
   computed: {
@@ -27,20 +31,23 @@ export default {
 
 <style lang="scss">
 .product-component {
-  background: lightgray;
+  background: rgba(211, 211, 211, 0.158);
   display: flex;
   flex-direction: column;
-}
 
-.spread {
-  display: flex;
-  justify-content: space-between;
-}
+  
+  .spread {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.image {
-  img {
-    max-width: 80%;
-    max-height: 300px;
+  .image {
+    img {
+      max-width: 80%;
+      max-height: 300px;
+    }
   }
 }
+
+
 </style>

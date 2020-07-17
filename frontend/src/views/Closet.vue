@@ -9,10 +9,12 @@
 
     <div class="products-list">
         <product
-            v-for="product in products"
-            v-bind:key="product.id"
-            :price="product.price"
-            :productImage="product.image"
+            v-for="p in products"
+            v-bind:key="p.id"
+            :price="p.price"
+            :productImage="p.image"
+            :productName="p.productName"
+            :xButton="p.xButton"
           />
     </div>
 
@@ -61,6 +63,7 @@ export default {
           price: p.meta.price,
           productName: p.meta.productName,
           image: p.meta.images[0],
+          xButton: true,
       }))
       this.loading = false;
     },
