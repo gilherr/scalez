@@ -5,7 +5,7 @@
     <h1>Tester Page</h1>
 
     <form @submit="onSubmit">
-      <p>
+      <div class="spread">
         <label for="userSelect">Select User</label>
         <select name="userSelect" id="userSelect" v-model="formData.user">
           <option
@@ -14,23 +14,23 @@
             v-bind:key="user.userId"
           >{{user.userId}}</option>
         </select>
-      </p>
-      <p>
+      </div>
+      <div class="spread">
         <label for="isNewUser">New user?</label>
         <input type="checkbox" name="isNewUser" v-model="formData.user.isNew" />
-      </p>
-      <p>
+      </div>
+      <div class="spread">
         <label for="isNewUser">Number of products to show</label>
         <input type="number" name="isNewUser" v-model="formData.user.productsShow" />
-      </p>
-      <p>
-        <label for="minLiked">Minimum liked products before closet</label>
+      </div>
+      <div class="spread">
+        <label for="minLiked">Mini liked products</label>
         <input type="number" name="minLiked" max="17" v-model="formData.user.minLikedProducts" />
-      </p>
+      </div>
 
-      <p>
+      <div class="submit-btn">
         <input type="submit" value="Start" />
-      </p>
+      </div>
     </form>
   </div>
 </template>
@@ -82,3 +82,24 @@ export default {
 
 };
 </script>
+
+<style lang="scss" scoped>
+.spread{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  input{
+    width: 100px;
+  }
+}
+
+#userSelect{
+  width: 110px;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+</style>
