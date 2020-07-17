@@ -10,7 +10,7 @@ const PORT = process.env.PORT || '3000';
 
 // Setup express app
 const app = express();
-app.use(cors({credentials: true, origin: 'http://localhost:8080'}))
+app.use(cors({credentials: true, origin: 'http://localhost:4000'}))
 app.use(cookieParser());
 app.use(customMiddleWares.getUserMetaFromCookie);
 
