@@ -5,13 +5,7 @@ const getUserMetaFromCookie = (req, res, next) => {
     res.status(401).json({error: 'cant make requests without user meta cookie'});
     res.end()
   } else {
-    req.userMetaCookie = JSON.parse(userMetaCookie);
-
-    if(!req.userMetaCookie.userId){
-      res.status(401).json({error: 'missing user info'});
-      res.end()
-    }
-
+    req.userMetaCookie = userMetaCookie ? JSON.parse(userMetaCookie) : null;
     next();
   }
 }
