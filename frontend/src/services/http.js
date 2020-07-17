@@ -57,4 +57,14 @@ export const httpService = {
     }
   },
 
+  async fetchCloset() {
+    try {
+      const response = await http.get('closet');
+      return response.data;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  },
+
 }

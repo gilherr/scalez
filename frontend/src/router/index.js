@@ -6,6 +6,7 @@ import Home from '@/views/Home.vue'
 import Tester from '@/views/Tester.vue'
 import Funnel from '@/views/Funnel.vue';
 import Summary from '@/views/Summary.vue';
+import Closet from '@/views/Closet.vue';
 
 
 Vue.use(VueRouter)
@@ -14,7 +15,8 @@ const routes = [
   { path: '/', name: 'Tester', component: Tester },
   { path: '/home', name: 'Home', component: Home },
   { path: '/funnel', name: 'Funnel', component: Funnel },
-  { path: '/funnel/summary', name: 'Summary', component: Summary }
+  { path: '/funnel/summary', name: 'Summary', component: Summary },
+  { path: '/closet', name: 'Closet', component: Closet },
 
 ]
 

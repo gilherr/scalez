@@ -5,6 +5,11 @@
       <span>Jeans</span>
     </span>
     <div class="product-container">
+      <div class="spread">
+        <img src="@/assets/funnel/stylerImg.png" alt="Styler Image" width="50px">
+        <span>Styled by {{stylerName}}</span>
+        <span>From {{stylerLocation}}</span>
+      </div>
       <product
         v-if="!loading"
         :price="displayedProduct.price"
@@ -18,7 +23,7 @@
     </span>
 
     <pre>
-      numRatedProducts: {{numRatedProducts}},
+      numLikedProducts: {{numLikedProducts}},
       productsShow: {{productsShow}},
       isNew: {{isNew}},
       userId: {{userId}}
@@ -48,7 +53,8 @@ export default {
   },
 
   computed: {
-    ...mapState('user', ['isNew', 'numRatedProducts', 'userId', 'productsShow']),
+    ...mapState('user', ['isNew', 'numLikedProducts', 'userId', 'productsShow']),
+    ...mapState('global', ['stylerName', 'stylerImg', 'stylerLocation']),
     ...mapGetters('user', ['seenEnough']),
   },
 
@@ -80,7 +86,8 @@ export default {
     },
 
     rateProduct(rating) {
-      this.$store.commit('user/setNumRatedProducts', this.numRatedProducts + 1);
+      if(rating === true)
+        this.$store.commit('user/setNumLikedProducts', this.numLikedProducts + 1);
       http.rateProduct(this.displayedProduct.id, rating);
 
       if(this.seenEnough){

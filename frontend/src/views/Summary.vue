@@ -7,7 +7,7 @@
       <div>
         <h2>Like at least {{minLikedProducts}} items</h2>
         <p v-if="seenEnough">(You already have the items)</p>
-        <p v-else>(You currently have {{numRatedProducts}})</p>
+        <p v-else>(You currently have {{numLikedProducts}})</p>
       </div>
       <div class="heart">Heart</div>
     </div>
@@ -25,7 +25,7 @@ export default {
   name: 'Summary',
 
   computed: {
-    ...mapState('user', ['numRatedProducts', 'minLikedProducts']),
+    ...mapState('user', ['numLikedProducts', 'minLikedProducts']),
     ...mapGetters('user', ['seenEnough'])
   },
   

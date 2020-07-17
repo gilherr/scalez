@@ -5,7 +5,7 @@ const state = {
   isNew: null,
   productsShow: null,
   minLikedProducts: null,
-  numRatedProducts: 0,
+  numLikedProducts: 0,
 };
 
 const actions = {
@@ -38,14 +38,14 @@ const mutations = {
     state.minLikedProducts = payload;
   },
 
-  setNumRatedProducts(state, payload) {
-    state.numRatedProducts = payload;
+  setNumLikedProducts(state, payload) {
+    state.numLikedProducts = payload;
   }
 };
 
 const getters = {
   seenEnough: state => {
-    return state.numRatedProducts >= state.minLikedProducts
+    return state.numLikedProducts >= state.minLikedProducts
   }
 }
 
