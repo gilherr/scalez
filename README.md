@@ -4,6 +4,10 @@ Scalez home assignment. Part of a fullstack interview.
 
 ## Usage
 
+In the root folder run `docker-compose up` and then browse to `http://localhost:4000/`
+
+You can also use pgAdmin to explore the database at `http://localhost:5050`. The password is in the `.env` file.
+
 ## API
 
 ### Scalez

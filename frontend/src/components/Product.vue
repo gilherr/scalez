@@ -62,8 +62,8 @@ export default {
       position: absolute;
       top: 10px;
       right: 0;
-      background: white;
-      padding: 5px;
+      background: #ffffff42;
+      padding: 3px 8px;
       text-align: center;
       text-decoration: none;
       display: inline-block;

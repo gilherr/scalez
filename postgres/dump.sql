@@ -5,7 +5,7 @@
 -- Dumped from database version 12.3
 -- Dumped by pg_dump version 12.2
 
--- Started on 2020-07-14 16:41:57 UTC
+-- Started on 2020-07-17 19:46:07 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -317,18 +317,6 @@ COPY public.product (product_id, meta) FROM stdin;
 --
 
 COPY public.rating (rating_id, fk_product_id, fk_user_id, "like", created_at) FROM stdin;
-1	4	3	t	2020-07-13 18:19:59.768692+00
-2	2	3	t	2020-07-13 18:20:40.746309+00
-3	2	1	t	2020-07-13 18:51:10.50666+00
-5	6	4	f	2020-07-13 18:51:32.108285+00
-7	10	2	f	2020-07-13 19:08:54.899295+00
-8	8	2	f	2020-07-13 19:10:56.22038+00
-12	2	2	f	2020-07-14 13:32:42.526718+00
-13	3	2	f	2020-07-14 13:32:45.222603+00
-4	5	4	t	2020-07-13 18:51:26.685654+00
-14	4	2	t	2020-07-14 13:32:47.721885+00
-11	1	2	t	2020-07-14 13:32:36.954018+00
-22	5	2	t	2020-07-14 16:04:41.10387+00
 \.
 
 
@@ -339,9 +327,9 @@ COPY public.rating (rating_id, fk_product_id, fk_user_id, "like", created_at) FR
 --
 
 COPY public."user" (user_id, is_new, created_at) FROM stdin;
-1	t	11:15:04.283216+00
-3	t	11:15:04.283216+00
 4	t	11:15:04.283216+00
+1	f	11:15:04.283216+00
+3	t	11:15:04.283216+00
 5	t	16:15:15.244578+00
 6	t	16:39:02.034411+00
 2	f	11:15:04.283216+00
@@ -381,7 +369,7 @@ SELECT pg_catalog.setval('public.product_product_id_seq', 17, true);
 -- Name: rating_rating_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.rating_rating_id_seq', 22, true);
+SELECT pg_catalog.setval('public.rating_rating_id_seq', 165, true);
 
 
 --
@@ -483,7 +471,7 @@ ALTER TABLE ONLY public.rating
     ADD CONSTRAINT rating_fk_user_id_fkey FOREIGN KEY (fk_user_id) REFERENCES public."user"(user_id);
 
 
--- Completed on 2020-07-14 16:41:57 UTC
+-- Completed on 2020-07-17 19:46:07 UTC
 
 --
 -- PostgreSQL database dump complete
