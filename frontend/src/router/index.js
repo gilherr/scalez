@@ -1,16 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
+
 import Home from '@/views/Home.vue'
 import Tester from '@/views/Tester.vue'
 import Funnel from '@/views/Funnel.vue';
-import store from '../store'
+import Summary from '@/views/Summary.vue';
+
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', name: 'Tester', component: Tester },
   { path: '/home', name: 'Home', component: Home },
-  { path: '/funnel', name: 'Funnel', component: Funnel }
+  { path: '/funnel', name: 'Funnel', component: Funnel },
+  { path: '/funnel/summary', name: 'Summary', component: Summary }
 
 ]
 
