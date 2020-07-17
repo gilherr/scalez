@@ -1,9 +1,18 @@
 <template>
   <div class="home-view">
-    <img src="../assets/home/cover.png" alt="Shopping Lady" width="300" />
-    <h1>Ready to StyleUp?!</h1>
-    <p>I'll show you personalized style advice. You tell me which you like. And i'll show you products that match!</p>
-    <button v-on:click="next">Next</button>
+
+    <div class="top-row">
+      <div class="img-container">
+        <img src="../assets/home/cover.png" alt="Shopping Lady"/>
+      </div>
+      <h1>Ready to StyleUp?!</h1>
+      <p>I'll show you personalized style advice. You tell me which you like. And i'll show you products that match!</p>
+    </div>
+
+    <div class="next-btn-container">
+      <a class="next-btn" v-on:click="next">Next</a>
+    </div>
+
   </div>
 </template>
 
@@ -43,3 +52,42 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.home-view {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  text-align: center;
+  height: 100%;
+}
+
+.img-container{
+  width: 100%;
+    img{
+      max-width:100%;
+      max-height:100%;
+    }
+}
+
+.next-btn-container {
+  display: flex;
+  justify-content: center;
+
+  .next-btn{
+    background: rgb(248,228,226);
+    background: linear-gradient(90deg, rgba(248,228,226,1) 0%, rgba(247,205,200,1) 100%);
+    border: none;
+    color: black;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px 0;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 80%;
+  }
+}
+
+</style>
