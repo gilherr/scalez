@@ -38,6 +38,15 @@ export const httpService = {
     }
   },
 
+  clearRatings() {
+    try {
+      http.get('/users/truncateRatings');
+    } catch (e) {
+      console.error(e);
+      return false;
+    } 
+  },
+
   async fetchProducts(productsShow) {
     try {
       const response = await http.get(`funnel/getProducts?productsShow=${productsShow}`);

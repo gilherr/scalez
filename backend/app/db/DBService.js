@@ -75,6 +75,18 @@ module.exports = {
         }
     },
 
+    truncateRatings: async () => {
+        try {
+        console.log('in backend truncating 2');
+
+            await dbClient.result('TRUNCATE rating')
+            return true;
+        } catch (e) {
+            console.error(e)
+            return false;
+        }
+    },
+
     // funnel
 
     getProducts: async (productsShow, seenProductsIds) => {

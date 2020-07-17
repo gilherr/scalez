@@ -11,6 +11,19 @@ users.get('/', async (req, res) => {
     }
 });
 
+
+users.get('/truncateRatings', async (req, res) => {
+    try {
+        console.log('in backend truncating 1');
+        await db.truncateRatings()
+        res.status(200).send();
+    } catch (e) {
+        console.error(e)
+        res.status(500).json({error: 'failed to truncate ratings table'});
+    }
+
+});
+
 users.put('/:userId', async (req, res) => {
     const {isNew} = req.query;
 

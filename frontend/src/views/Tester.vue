@@ -32,6 +32,9 @@
         <input type="submit" value="Start" />
       </div>
     </form>
+
+    <button v-on:click="clearRatings">Clear Ratings</button>
+
   </div>
 </template>
 
@@ -72,6 +75,10 @@ export default {
       this.$router.push({ path: '/home', query: this.formData.user })
     },
 
+    clearRatings() {
+      http.clearRatings();
+    }
+
   },
 
 
@@ -89,14 +96,16 @@ export default {
   .spread{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin: 10px 0;
     input{
-      width: 100px;
+      width: 80px;
+      text-align: center;
     }
   }
 
   #userSelect{
-    width: 110px;
+    width: 90px;
+    text-align: center;
   }
 
   .submit-btn {
