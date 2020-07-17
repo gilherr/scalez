@@ -83,23 +83,27 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.spread{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  input{
-    width: 100px;
+<style lang="scss">
+
+.tester-view{
+  .spread{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    input{
+      width: 100px;
+    }
+  }
+
+  #userSelect{
+    width: 110px;
+  }
+
+  .submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
   }
 }
 
-#userSelect{
-  width: 110px;
-}
-
-.submit-btn {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-}
 </style>
