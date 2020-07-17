@@ -4,21 +4,21 @@ const state = {
   userId: null,
   isNew: null,
   productsShow: null,
-  minLikedProducts: null
+  minLikedProducts: null,
+  numRatedProducts: 0,
 };
 
 const actions = {
   setAllUserData({ commit }, userMeta) {
-    const { userId, is_new, productsShow, minLikedProducts } = userMeta;
+    const { userId, isNew, productsShow, minLikedProducts } = userMeta;
 
     Vue.$cookies.set('userMeta', JSON.stringify(userMeta));
 
     commit('setId', userId);
-    commit('setIsNew', is_new);
+    commit('setIsNew', isNew);
     commit('setProductsShow', productsShow);
     commit('setMinLikedProducts', minLikedProducts);
-  }
-
+  },
 };
 
 const mutations = {
@@ -36,6 +36,16 @@ const mutations = {
 
   setMinLikedProducts(state, payload) {
     state.minLikedProducts = payload;
+  },
+
+  setNumRatedProducts(state, payload) {
+    state.numRatedProducts = payload;
+  }
+};
+
+const getters = {
+  seenEnough: state => {
+    return state.numRatedProducts >= state.minLikedProducts
   }
 }
 
@@ -44,4 +54,5 @@ export default {
   state,
   mutations,
   actions,
+  getters
 };

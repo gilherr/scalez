@@ -36,6 +36,25 @@ export const httpService = {
       console.error(e);
       return false;
     }
-  }
+  },
+
+  async fetchProducts(productsShow) {
+    try {
+      const response = await http.get(`funnel/getProducts?productsShow=${productsShow}`);
+      return response.data;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  },
+
+  rateProduct(pid, rating) {
+    try {
+      http.put(`funnel/rate?productId=${pid}&like=${rating}`);
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  },
 
 }
