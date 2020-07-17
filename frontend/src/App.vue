@@ -27,4 +27,15 @@ body {
     margin: 0 auto;
   }
 }
+
+.btn.pill {
+    border: none;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px 0;
+    cursor: pointer;
+    border-radius: 50px;
+}
 </style>
