@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "8b897c63-712a-42ef-aa70-4d0bd85c42d2",
+		"name": "scalez_assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/ - home",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users - get all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/:userId - get user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/:userId/products - get all products the user saw",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/:userid - update user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/2?isNew=true",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"2"
+					],
+					"query": [
+						{
+							"key": "isNew",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/funnel/getProducts - get 'productsShow' num of products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/getProducts?productsShow",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"getProducts"
+					],
+					"query": [
+						{
+							"key": "productsShow",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/funnel/rate - rate a product (user cookie needed)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/funnel/rate?productId=10&like=false",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"funnel",
+						"rate"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "10"
+						},
+						{
+							"key": "like",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/funnel/finished - set user 'is_new\" to false",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/funnel/finished",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"funnel",
+						"finished"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/closet - get all liked product for user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/closet",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"closet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/abtest/start/{abtestName} - start abtest",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/abtest/start/test_a",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"abtest",
+						"start",
+						"test_a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/abtest/end/{abtestName} - end abtest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"\",\n    \"code\": \"foo = \\\"bar11111111111111\\\"\\n\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/abtest/end/test_a",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"abtest",
+						"end",
+						"test_a"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
