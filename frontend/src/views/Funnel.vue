@@ -28,8 +28,7 @@
       </div>
     </div>
 
-
-    <div class="btns-container">
+    <div class="btns-container" v-bind:class="{ 'abtest-class': isBtnsTestGroupB }">
       <a class="btn dislike" v-on:click="rateProduct(false)">
         <img src="@/assets/funnel/x.png" alt="Styler Image" />
         </a>
@@ -52,7 +51,8 @@ export default {
     return {
       displayedProduct: {},
       loading: false,
-      products: []
+      products: [],
+      isBtnsTestGroupB: null
     };
   },
 
@@ -68,6 +68,7 @@ export default {
 
   created() {
     this.fetchProducts();
+    this.startBtnsAbtest();
   },
 
   methods: {
@@ -76,6 +77,11 @@ export default {
       this.products = await http.fetchProducts(this.productsShow);
       this.popProduct();
       this.loading = false;
+    },
+
+    async startBtnsAbtest() {
+      const { allocatedGroup } = await http.startBtnsAbtest('test_a');
+      this.isBtnsTestGroupB = allocatedGroup === 'group_b';
     },
 
     popProduct() {
@@ -194,6 +200,7 @@ export default {
       display: inline-block;
       cursor: pointer;
       border-radius: 50%;
+      background: white;
 
       img{
         height: 50px;
@@ -217,5 +224,9 @@ export default {
       box-shadow: 6px 4px 14px 3px #f8cec8;
     }
   }
+
+  .btns-container.abtest-class{
+      background: linear-gradient(90deg, rgba(252,222,217,0) 0%, rgba(252,222,217,0.8519782913165266) 50%, rgba(252,222,217,0) 100%);
+    }
 }
 </style>

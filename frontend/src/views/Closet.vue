@@ -55,6 +55,7 @@ export default {
   created() {
     this.fetchCloset();
     http.updateUserMeta({userId: this.userId, isNew: false})
+    http.endBtnsAbtest('test_a');
   },
   
   methods: {

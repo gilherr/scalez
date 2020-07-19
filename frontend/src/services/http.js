@@ -76,4 +76,24 @@ export const httpService = {
     }
   },
 
+  async startBtnsAbtest(abtestName) {
+    try {
+      const response = await http.put(`/abtest/start/${abtestName}`);
+      return response.data;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  },
+
+  async endBtnsAbtest(abtestName) {
+    try {
+      const response = await http.get(`/abtest/end/${abtestName}`);
+      return response.data;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  },
+
 }
