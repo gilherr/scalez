@@ -201,12 +201,17 @@ module.exports = {
                 `INSERT INTO 
                     abtest_allocation
                     ("name", "group", fk_user_id, fk_abtest_id)
-                 VALUES 
+                VALUES 
                     ($1,$2,$3,$4)
-                 RETURNING 
-                    allocation_id`, 
+                ON CONFLICT(fk_user_id, fk_abtest_id) 
+                    DO UPDATE SET name=EXCLUDED.name
+                RETURNING 
+                    allocation_id, "group"`, 
                  [abtestName, group, userId, abtestId])
-            return Number(result.allocation_id);
+            return { 
+                allocation_id: Number(result.allocation_id), 
+                group: result.group 
+            } ;
         } catch (e) {
             if(e.constraint === 'abtest_allocation_pkey')
                 throw('abtest already exists')
