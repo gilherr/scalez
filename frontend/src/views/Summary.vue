@@ -20,7 +20,7 @@
     <p>So i understand your style better!</p>
 
     <div class="next-btn-container">
-      <a class="next-btn btn pill" v-on:click="routeForward">Next</a>
+      <a class="next-btn" v-on:click="routeForward">Next</a>
     </div>
 
   </div>

@@ -28,12 +28,14 @@
         <input type="number" name="minLiked" max="17" v-model="formData.user.minLikedProducts" />
       </div>
 
-      <div class="submit-btn">
-        <input type="submit" value="Start" />
+      <div class="tester-buttons bump">
+        <input class="next-btn" type="submit" value="Start" />
       </div>
     </form>
-
-    <button v-on:click="clearRatings">Clear Ratings</button>
+    
+    <div class="tester-buttons">
+      <button class="next-btn" v-on:click="clearRatings">Clear Ratings</button>
+    </div>
 
   </div>
 </template>
@@ -108,10 +110,13 @@ export default {
     text-align: center;
   }
 
-  .submit-btn {
+  .tester-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+  }
+
+  .tester-buttons.bump{
+    margin-top: 100px;
   }
 }
 

@@ -28,14 +28,17 @@ body {
   }
 }
 
-.btn.pill {
-    border: none;
-    padding: 15px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 20px 0;
-    cursor: pointer;
-    border-radius: 50px;
+.next-btn{
+  border: none;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 20px 0;
+  cursor: pointer;
+  border-radius: 50px;
+  background: rgb(248,228,226);
+  background: linear-gradient(90deg, rgba(248,228,226,1) 0%, rgba(247,205,200,1) 100%);
+  width: 80%;
 }
 </style>

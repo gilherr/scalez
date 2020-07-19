@@ -10,7 +10,7 @@
     </div>
 
     <div class="next-btn-container">
-      <a class="next-btn btn pill" v-on:click="next">Next</a>
+      <a class="next-btn" v-on:click="next">Next</a>
     </div>
 
   </div>

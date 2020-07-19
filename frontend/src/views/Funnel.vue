@@ -2,7 +2,7 @@
   <div class="funnel-view">
     <div class="header-row">
       <img src="../assets/funnel/savvy.png" alt="Savvy logo" />
-      <div class="tag btn pill">
+      <div class="tag">
         <img src="../assets/funnel/jeans_icon.png" />
         <div>Jeans</div>
       </div>
@@ -141,9 +141,11 @@ export default {
     }
 
     .tag {
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 50px;
       background: #f7f7fa;
-      margin: unset;
-      padding: unset;
       font-size: small;
       display: flex;
       justify-content: center;
