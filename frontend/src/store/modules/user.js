@@ -19,6 +19,14 @@ const actions = {
     commit('setProductsShow', productsShow);
     commit('setMinLikedProducts', minLikedProducts);
   },
+
+  clearUserStore({ commit }) {
+    commit('setId', null);
+    commit('setIsNew', null);
+    commit('setProductsShow', null);
+    commit('setMinLikedProducts', null);
+    commit('setNumLikedProducts', 0);
+  },
 };
 
 const mutations = {

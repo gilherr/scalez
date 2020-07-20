@@ -21,6 +21,9 @@
       </div>
     </div>
 
+    <div class="next-btn-container">
+      <a class="next-btn" v-on:click="restart">Reset & Restart</a>
+    </div>
 
   </div>
 </template>
@@ -73,9 +76,12 @@ export default {
       this.loading = false;
     },
 
-    routeForward() {
-      const path = this.seenEnough ? '/closet' : '/funnel';
-      this.$router.push(path)
+    async restart() {
+      await http.clearRatings();
+      this.$store.dispatch('user/clearUserStore');
+      this.$cookies.remove('userMeta');
+      this.$cookies.remove('abtests');
+      this.$router.push('/')
     },
   },
 };

@@ -8,8 +8,8 @@
 
     <div class="bottom-row">
       <div><b>${{price}}</b></div>
-      <div>{{brand}}</div>
-      <div class="name">{{productName}}</div>
+      <div v-if="brand">{{brand}}</div>
+      <div v-if="productName" class="name">{{productName}}</div>
     </div>
 
 
@@ -49,6 +49,8 @@ export default {
     height: 15%;
     .name{
       overflow: hidden;
+      white-space: nowrap;
+      margin-left: 20px;
     }
   }
 
