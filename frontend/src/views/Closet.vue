@@ -77,7 +77,6 @@ export default {
     },
 
     async restart() {
-      await http.clearRatings();
       this.$store.dispatch('user/clearUserStore');
       this.$cookies.remove('userMeta');
       this.$cookies.remove('abtests');
