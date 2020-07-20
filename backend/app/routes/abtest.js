@@ -1,13 +1,5 @@
 const abtest = require('express').Router();
-const db = require('../db/DBService')
-
-// abtest.get('/', async (req, res) => {
-
-// });
-
-// abtest.get('/:abtestName', async (req, res) => {
-
-// });
+const db = require('../db/DBService');
 
 abtest.put('/start/:abtestName', async (req, res) => {
 
@@ -22,7 +14,7 @@ abtest.put('/start/:abtestName', async (req, res) => {
 
         const result = await db.startExperiment(req.userMetaCookie.userId, abtestName, group, abtestId)
         const abtestMeta = {
-            allocationId: result.allocationId,
+            allocationId: result.allocation_id,
             allocatedGroup: result.group
         }
         
@@ -47,7 +39,7 @@ abtest.get('/end/:abtestName', async (req, res) => {
         if(!abtestMeta)
             throw('failed to read abtest meta from cookie')
         await db.setAbtestAllocationConversion(abtestMeta.allocationId)
-        res.status(200).send();
+        res.status(200).json(abtestMeta);
     } catch (e) {
         console.error(e)
         res.status(500).json({error: 'failed to set abtest conversion'});
